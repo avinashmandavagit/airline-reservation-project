@@ -1,0 +1,67 @@
+
+{% include "head.html"%}
+
+
+<style>
+    fieldset, legend {
+   all: revert;
+}
+.reset {
+    all: revert;
+}
+</style>
+
+<script>
+    function validate(){
+        let phone = document.getElementById("phone").value
+        console.log(phone)
+        if(phone.length!=10){
+            alert('PhoneNumber Length Must be Greater than 10')
+            return false
+        }
+        return true
+    }
+</script>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-9"></div>
+        <div class="col-md-3 mt-3" style="margin-top:50px">
+            <div class="card mt-3 p-3">
+                <form action="customer_registration1" method="post">
+                    <fieldset class="reset w-90" style="border:2px solid gray">
+                        <legend class="reset text-center" style="font-size:20px"><b>Customer Registration</b></legend>
+                        <div class="mt-2">
+                                <label for="name" class="form-label">Name</label>
+                                <input type="text" name="name" id="name" required placeholder="Enter Name" class="form-control">
+                            </div>
+                        <div class="mt-2">
+                                <label for="phone" class="form-label">Phone Number</label>
+                                <input type="number" name="phone" min="0" required id="phone" placeholder="Enter Number" class="form-control">
+                            </div>
+                            <div class="mt-2">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="text" name="email" id="email" required placeholder="Enter Email" class="form-control">
+                            </div>
+                             <div class="mt-2">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" name="password" id="password" required placeholder="Enter Password" class="form-control">
+                            </div>
+                             <div class="mt-2">
+                                <label for="password">Gender</label>
+                                 <input type="radio" name="gender" id="male" value="male" required><label for="male">Male</label>
+                                <input type="radio" name="gender" id="female" value="female" required><label for="female">Female</label>
+                            </div>
+                            <div class="mt-2">
+                                <label for="address" class="form-label">Address</label>
+                                <textarea name="address" id="address" placeholder="Enter Address" required class="form-control"></textarea>
+                            </div>
+                            <div class="mt-3">
+                                <input type="submit" value="Click Here To Register" class="btn btn-warning w-100">
+                            </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

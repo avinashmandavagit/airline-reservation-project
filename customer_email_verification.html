@@ -1,0 +1,32 @@
+{% include "head.html"%}
+
+<style>
+    fieldset, legend {
+   all: revert;
+}
+.reset {
+    all: revert;
+}
+</style>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-9"></div>
+            <div class="col-md-3 mt-5" style="margin-top:50px">
+                <div class="card mt-5 p-3">
+                    <form action="customer_email_verification1">
+                        <fieldset class="reset w-90" style="border:2px solid gray">
+                            <legend class="reset text-center" style="font-size:20px"><b>Verify Email</b></legend>
+                                <div>
+                                    <h6><label for="email" class="form-label">Enter Email</label></h6>
+                                    <input type="text" id="email" name="email" required class="form-control" placeholder="Enter Email">
+                                </div>
+                                 <div class="mt-2">
+                                    <input type="submit" id="Verify" value="Verify" class="form-control btn btn-info">
+                                </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+    </div>
+</div>

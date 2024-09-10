@@ -1,0 +1,37 @@
+{% include "head.html"%}
+
+
+<style>
+    fieldset, legend {
+   all: revert;
+}
+.reset {
+    all: revert;
+}
+</style>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-9"></div>
+        <div class="col-md-3 mt-5" style="margin-top:50px">
+            <div class="card mt-5 p-3">
+                <form action="admin_login1" method="post">
+                    <fieldset class="reset w-90" style="border:2px solid gray">
+                        <legend class="reset text-center" style="font-size:20px"><b>Admin Login</b></legend>
+                            <div class="mt-2">
+                                <label for="username" class="form-label">UserName</label>
+                                <input type="text" name="username" id="username" required placeholder="Enter Name" class="form-control">
+                            </div>
+                             <div class="mt-2">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" name="password" id="password" required placeholder="Enter Password" class="form-control">
+                            </div>
+                            <div class="mt-3">
+                                <input type="submit" value="Click Here To Login" class="btn btn-primary w-100">
+                            </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

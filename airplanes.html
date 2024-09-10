@@ -1,0 +1,90 @@
+{% if session["role"] == 'admin':%}
+    {% include 'admin_head.html' %}
+{% elif session["role"] == 'customer':%}
+    {% include 'customer_head.html' %}
+{% else:%}
+    {% include 'head.html' %}
+{% endif %}
+
+<style>
+body {
+ background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRU5acBIU2C-wtgj112fQGZKfDbAQoCvCmXxToIGGSC8BpXqMsuiXfthN9Edy7sdjR14Ig&usqp=CAU");
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover;
+}
+</style>
+<div class="container">
+    <div class="row">
+        <form action="airplanes" method="get">
+            {% if session['role'] == 'customer': %}
+                <div class="row mt-2">
+                 <div class="col-md-3 mt-3">
+                    <input type="text" name="from_airport_name" value="{{from_airport_name}}" class="form-control" placeholder="Source">
+                </div>
+                <div class="col-md-3 mt-3">
+                    <input type="text" name="to_airport_name" value="{{to_airport_name}}" class="form-control" placeholder="Destination">
+                </div>
+                <div class="col-md-2 mt-3">
+                    <input type="date" name="search_date" value="{{search_date}}" class="form-control">
+                </div>
+                 <div class="col-md-2 mt-3">
+                     <input type="submit" value="Submit" class="btn btn-primary w-100">
+                </div>
+                    {% endif %}
+                 {% if session['role'] =='admin':%}
+                    <div class="row">
+                        <div class="col-md-8"></div>
+                    <div class="col-md-4">
+                        <a href="add_airplane" class="btn btn-success w-100" style="color:white;margin-top:20px;border-radius:50px;">Add AirLine</a>
+                    </div>
+                    </div>
+
+              {% endif %}
+            </div>
+        </form>
+   </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="text-center mt-5 h4">View AirLines</div>
+      {% if session['role'] == "customer":%}
+      <div class="text-center h3" style="color:red">{{message}}</div>
+      {% endif %}
+    {% for airplane in airplanes: %}
+      <div class="col-md-3 mt-2">
+        <div class="card mt-2 p-3">
+           <div class="card-image text-center">
+             <img src="{{airplane[6]}}" style="max-width:100%;height:100px;border-radius: 50px;">
+           </div>
+          <div class="mt-1">
+            <div class="text-muted">AirLine Name</div>
+            <div class="mt-1"><b>{{airplane[1]}}</b></div>
+          </div>
+        <div class="mt-2">
+          <div class="text-muted">AirLine Number</div>
+          <div class="mt-1"><b>{{airplane[2]}}</b></div>
+        </div>
+        <div class="mt-2">
+          <div class="text-muted">First Class Seats : <span><b>{{airplane[3]}} Seats</b></span></div>
+        </div>
+           <div class="mt-2">
+              <div class="text-muted">Business Class Seats : <span><b>{{airplane[4]}} Seats</b></span></div>
+          </div>
+           <div class="mt-2">
+               <div class="text-muted">Economy Class Seats : <span><b>{{airplane[5]}} Seats</b></span></div>
+          </div>
+          <div class="row">
+            {% if session['role'] =='admin'%}
+              <div class="col-md-6 mt-2">
+                <a href="add_flight?airplane_id={{airplane[0]}}" class="btn btn-success w-100">Add Flight</a>
+              </div>
+            {% endif %}
+             <div class="col-md-6 mt-2">
+              <a href="view_flights?airplane_id={{airplane[0]}}" class="btn btn-primary w-100">View Flights</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>

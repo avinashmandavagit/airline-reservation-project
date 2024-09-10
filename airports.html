@@ -1,0 +1,63 @@
+{% include "admin_head.html"%}
+
+<style>
+body {
+ background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRU5acBIU2C-wtgj112fQGZKfDbAQoCvCmXxToIGGSC8BpXqMsuiXfthN9Edy7sdjR14Ig&usqp=CAU");
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover;
+}
+</style>
+
+<style>
+    fieldset, legend {
+   all: revert;
+}
+.reset {
+    all: revert;
+}
+</style>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 mt-5">
+            <div class="card mt-5 p-3">
+                <form action="add_airport" method="post">
+                    <fieldset class="reset w-90" style="border:2px solid gray">
+                        <legend class="reset text-center" style="font-size:20px"><b>Add Airports</b></legend>
+                            <div class="mt-2">
+                                <label for="airport_name" class="form-label">Airport Name</label>
+                                <input type="text" name="airport_name" required id="airport_name" placeholder="Enter Name" class="form-control">
+                            </div>
+                          <div class="mt-2">
+                                <label for="airport_code" class="form-label">Airport Code</label>
+                                <input type="text" name="airport_code" required id="airport_code" placeholder="Enter Code" class="form-control">
+                            </div>
+                            <div class="mt-3">
+                                <input type="submit" value="Add Airport" class="btn btn-primary w-100">
+                            </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+        <div class="col-md-5 mt-5">
+            <div class="text-center h4"><b>View Airport Names</b></div>
+             <table class="table table-primary table-bordered mt-4 text-center">
+                  <tr>
+                    <thead>
+                      <th>Airport Name</th>
+                      <th>Airport Code</th>
+                    </thead>
+                  </tr>
+                  <tbody>
+                    {% for airport in airports:%}
+                   <tr>
+                    <td>{{airport[1]}}</td>
+                    <td>{{airport[2]}}</td>
+                   </tr>
+                  {% endfor %}
+                  </tbody>
+          </table>
+        </div>
+    </div>
+</div>

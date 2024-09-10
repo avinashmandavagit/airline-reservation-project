@@ -1,0 +1,130 @@
+{% include "admin_head.html"%}
+
+<style>
+body {
+ background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRU5acBIU2C-wtgj112fQGZKfDbAQoCvCmXxToIGGSC8BpXqMsuiXfthN9Edy7sdjR14Ig&usqp=CAU");
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover;
+}
+</style>
+
+<style>
+    fieldset, legend {
+   all: revert;
+}
+.reset {
+    all: revert;
+}
+</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            var today = new Date().toISOString().slice(0, 16);
+            $("#departure").attr("min",today)
+        });
+
+    </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            var today = new Date().toISOString().slice(0, 16);
+            $("#arrival").attr("min",today)
+        });
+
+    </script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script>
+  $(document).ready(function(){
+      $("#from_airport").on("change", ()=>{
+        if($("#from_airport").val()!=""){
+         validate('from_airport')
+        }
+      })
+      $("#to_airport").on("change", ()=>{
+        if($("#to_airport").val()!=""){
+         validate('to_airport')
+        }
+      })
+  })
+    function validate(airport){
+    let from_airport = $("#from_airport").val()
+    let to_airport = $("#to_airport").val()
+
+       if (from_airport === to_airport){
+        if(airport=='from_airport'){
+            $("#from_airport").val("")
+        }
+        if(airport=='to_airport'){
+            $("#to_airport").val("")
+        }
+        alert(" From Airport and To Airport should not be Same")
+       }
+    }
+</script>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8 mt-5">
+            <div class="card mt-5 p-3">
+                <form action="add_flight1" method="post"  onchange="return validate()">
+                    <input type="hidden" name="airplane_id" value="{{airplane_id}}">
+                    <fieldset class="reset w-90" style="border:2px solid gray">
+                        <legend class="reset text-center" style="font-size:20px"><b>Add Flight</b></legend>
+                            <div class="row">
+                                <div class="col-md-6 mt-2">
+                                    <label for="from_airport" class="form-label">From Airport</label>
+                                    <select name="from_airport" id="from_airport" required class="form-control">
+                                        <option value="">Choose Source</option>
+                                        {% for airport in airports:%}
+                                            <option value="{{airport[0]}}">{{airport[1]}}</option>
+                                        {% endfor %}
+                                    </select>
+
+                                </div>
+                                 <div class="col-md-6 mt-2">
+                                    <label for="to_airport" class="form-label">To Airport</label>
+                                    <select name="to_airport" id="to_airport" required class="form-control">
+                                        <option value="">Choose Destination</option>
+                                        {% for airport in airports:%}
+                                            <option value="{{airport[0]}}">{{airport[1]}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+
+                                <div class="col-md-6 mt-2">
+                                    <label for="first_class_price" class="form-label">First Class Price</label>
+                                    <input type="number" min="1" name="first_class_price" id="first_class_price" required placeholder="Enter Price" class="form-control">
+                                </div>
+                                <div class="col-md-6 mt-2">
+                                    <label for="business_class_price" class="form-label">Business Class Price</label>
+                                    <input type="number" min="1" name="business_class_price" id="business_class_price" required placeholder="Enter Price" class="form-control">
+                                </div>
+                                 <div class="col-md-6 mt-2">
+                                    <label for="economy_class_price" class="form-label">Economy Class Price</label>
+                                    <input type="number" min="1" name="economy_class_price" id="economy_class_price" required placeholder="Enter Price" class="form-control">
+                                </div>
+                                <div class="col-md-6 mt-2">
+                                    <label for="departure" class="form-label">Departure</label>
+                                    <input type="datetime-local" name="departure" id="departure" required class="form-control">
+                                </div>
+                                <div class="col-md-6 mt-2">
+                                    <label for="arrival" class="form-label">Arrival</label>
+                                    <input type="datetime-local" name="arrival" id="arrival" required class="form-control">
+                                </div>
+                                 <div class="col-md-6 mt-2">
+                                    <label for="gate_number" class="form-label">Gate Number</label>
+                                    <input type="number" min="1" name="gate_number" id="gate_number" required placeholder="Enter Number" class="form-control">
+                                </div>
+                                </div>
+                                <div class="mt-4">
+                                     <input type="submit" value="Add Flight" class="btn btn-primary w-100" >
+                                </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

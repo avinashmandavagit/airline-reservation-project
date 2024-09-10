@@ -1,0 +1,70 @@
+{% include "admin_head.html"%}
+
+<style>
+body {
+ background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRU5acBIU2C-wtgj112fQGZKfDbAQoCvCmXxToIGGSC8BpXqMsuiXfthN9Edy7sdjR14Ig&usqp=CAU");
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover;
+}
+</style>
+
+<style>
+    fieldset, legend {
+   all: revert;
+}
+.reset {
+    all: revert;
+}
+</style>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6 mt-5">
+            <div class="card mt-5 p-3">
+                <form action="add_airplane1" method="post" enctype="multipart/form-data">
+                    <fieldset class="reset w-90" style="border:2px solid gray">
+                        <legend class="reset text-center" style="font-size:20px"><b>Add AirLines</b></legend>
+                            <div class="row">
+                                <div class="col-md-6 mt-2">
+                                    <label for="airplane_name" class="form-label">AirLine Name</label>
+                                    <select name="airplane_name" id="airplane_name" required class="form-control">
+                                        <option value="">Choose Airline</option>
+                                        <option value="SouthWest Airline">SouthWest Airline</option>
+                                        <option value="JetBlue">Jet Blue</option>
+                                        <option value="Northwest Airline">Northwest Airline</option>
+                                        <option value="Spirit Airline">Spirit Airline</option>
+                                        <option value="American Airline">American Airline</option>
+                                        <option value="Delta Airline">Delta Airline</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 mt-2">
+                                    <label for="airplane_number" class="form-label">AirLine Number</label>
+                                    <input type="text" name="airplane_number" required id="airplane_number" placeholder="Enter Number" class="form-control">
+                                </div>
+                                <div class="col-md-6 mt-2">
+                                    <label for="first_class_seats" class="form-label">First Class Seats</label>
+                                    <input type="text" name="first_class_seats" id="first_class_seats" placeholder="Enter Seats" class="form-control">
+                                </div>
+                                <div class="col-md-6 mt-2">
+                                    <label for="business_class_seats" class="form-label">Business Class Seats</label>
+                                    <input type="text" name="business_class_seats" id="business_class_seats" required placeholder="Enter Seats" class="form-control">
+                                </div>
+                                 <div class="col-md-6 mt-2">
+                                    <label for="economy_class_seats" class="form-label">Economy Class Seats</label>
+                                    <input type="text" name="economy_class_seats" id="economy_class_seats" required placeholder="Enter Seats" class="form-control">
+                                </div>
+                                <div class="col-md-6 mt-2">
+                                    <label for="picture" class="form-label">Upload Picture</label>
+                                    <input type="file" name="picture" id="picture" required class="form-control">
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <input type="submit" value="Add AirLine" class="btn btn-primary w-100">
+                            </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

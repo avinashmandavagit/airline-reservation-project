@@ -1,0 +1,109 @@
+{% if session["role"] == 'admin':%}
+    {% include 'admin_head.html' %}
+{% elif session["role"] == 'customer':%}
+    {% include 'customer_head.html' %}
+{% else:%}
+    {% include 'head.html' %}
+{% endif %}
+
+<div class="container">
+    <div class="row">
+        {% for flight in flights:%}
+        {% set airplane = get_airplane_id(flight[11])%}
+         {% set from_airport = get_from_airport_id(flight[12])%}
+        {% set to_airport = get_to_airport_id(flight[13])%}
+         <div class="col-md-2"></div>
+         <div class="col-md-8">
+            <div class="card mt-5 p-3">
+                <div class="row">
+                    <div class="col-md-3 mt-1">
+                        <div class="text-muted mt-1">Airplane Name</div>
+                        <div class=""><b>{{airplane[1]}}</b></div>
+                    </div>
+                     <div class="col-md-3 mt-1">
+                        <div class="text-muted mt-1">From Airport</div>
+                        <div class=""><b>{{from_airport[1]}}</b></div>
+                     </div>
+                     <div class="col-md-3 mt-1">
+                        <div class="text-muted mt-1">To Airport</div>
+                        <div class=""><b>{{to_airport[1]}}</b></div>
+                     </div>
+                     <div class="col-md-3 mt-2">
+                        <a href="view_bookings?flight_id={{flight['_id']}}" class="btn btn-success w-100">View Flight Bookings</a>
+                     </div>
+                    <hr>
+                    <div class="col-md-3 mt-1">
+                        <div class="text-muted mt-1">Departure Time</div>
+                        <div class=""><b> {{flight[6].strftime("%I")}}:{{flight[6].strftime("%M")}} {{flight[6].strftime("%p")}}</b></div>
+                    </div>
+                    <div class="col-md-3 mt-1">
+                        <div class="text-muted mt-1">Arrival Time</div>
+                        <div class=""><b> {{flight[7].strftime("%I")}}:{{flight[7].strftime("%M")}} {{flight[7].strftime("%p")}}</b></div>
+                    </div>
+                    <div class="col-md-3 mt-1">
+                        <div class="text-muted mt-1">Date</div>
+                        <div class=""><b> {{flight[8].strftime("%I")}}:{{flight[8].strftime("%M")}} {{flight[8].strftime("%p")}}</b></div>
+                    </div>
+                    <div class="col-md-3 mt-1">
+                        <div class="text-muted mt-1">Gate Number</div>
+                        <div class=""><b>{{flight[9]}}</b></div>
+                    </div>
+                    <hr>
+                    <div class="col-md-4">
+                        <div class="card mt-2 p-2">
+                            <label class="text-center"><b>First Class</b></label>
+                             <div class="text-muted mt-1">Number Of Seats</div>
+                            <div class=""><b>{{airplane[3]}} Seats</b></div>
+                            <div class="text-muted mt-1">Available Seats</div>
+                            {% set booked_seats = get_booked_seats_by_flight_id(flight[0],'First Class')%}
+                             <div class=""><b>{{int(airplane[3])- int(booked_seats)}} Seats</b></div>
+                            <div class="text-muted mt-1">Price Per Seat</div>
+                            <div class=""><b>$ {{flight[3]}}</b></div>
+                               {% if session['role'] == "customer":%}
+                                <div class=" mt-2">
+                                    <a href="book_seats?flight_id={{flight[0]}}&class_type={{'First Class'}}&seat_numbers={{airplane[3]}}&amount={{flight[3]}}" class="btn btn-primary w-100">Book Flight Ticket</a>
+                                </div>
+                                {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                         <div class="card mt-2 p-2">
+                            <label class="text-center"><b>Business Class</b></label>
+                             <div class="text-muted mt-1">Number Of Seats</div>
+                             <div class=""><b>{{airplane[4]}} Seats</b></div>
+                             <div class="text-muted mt-1">Available Seats</div>
+                             {% set booked_seats = get_booked_seats_by_flight_id(flight[0],'Business Class')%}
+                             <div class=""><b>{{int(airplane[4])- int(booked_seats)}} Seats</b></div>
+                             <div class="text-muted mt-1">Price Per Seat</div>
+                            <div class=""><b>$ {{flight[4]}}</b></div>
+                                {% if session['role'] == "customer":%}
+                                <div class="mt-2">
+                                    <a href="book_seats?flight_id={{flight[0]}}&class_type={{'Business Class'}}&seat_numbers={{airplane[4]}}&amount={{flight[4]}}" class="btn btn-primary w-100">Book Flight Ticket</a>
+                                </div>
+                                {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                         <div class="card mt-2 p-2">
+                            <label class="text-center"><b>Economy Class</b></label>
+                             <div class="text-muted mt-1">Number Of Seats</div>
+                             <div class=""><b>{{airplane[5]}} Seats</b></div>
+                             <div class="text-muted mt-1">Available Seats</div>
+                              {% set booked_seats = get_booked_seats_by_flight_id(flight[0],'Economy Class')%}
+                             <div class=""><b>{{int(airplane[5])- int(booked_seats)}} Seats</b></div>
+                             <div class="text-muted mt-1">Price Per Seat</div>
+                            <div class=""><b>$ {{flight[5]}}</b></div>
+                                {% if session['role'] == "customer":%}
+                                <div class="mt-2">
+                                    <a href="book_seats?flight_id={{flight[0]}}&class_type={{'Economy Class'}}&seat_numbers={{airplane[5]}}&amount={{flight[5]}}" class="btn btn-primary w-100">Book Flight Ticket</a>
+                                </div>
+                               {% endif %}
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        <div class="col-md-2"></div>
+        {% endfor %}
+    </div>
+</div>
